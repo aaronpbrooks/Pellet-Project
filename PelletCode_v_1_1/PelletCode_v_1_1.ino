@@ -1,4 +1,4 @@
-
+ 
 //#include <MenuBackend.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -264,21 +264,21 @@ void monitorInput()
         switch(buttonPress)
         {
           case RIGHT_BUTTON:
-            Serial.println(F("Right"));
+            //Serial.println(F("Right"));
             break;
           case LEFT_BUTTON:
-             Serial.println(F("Left"));         
+             //Serial.println(F("Left"));         
             break;
           case DOWN_BUTTON:
             updateState(MAIN_MENU_RESULTS);
-            Serial.println(F("Down"));        
+            //Serial.println(F("Down"));        
             break;
           case UP_BUTTON:
-            Serial.println(F("Up")); 
+            //Serial.println(F("Up")); 
             updateState(MAIN_MENU_SETTINGS);
             break;
           case SELECT_BUTTON:
-            Serial.println(F("Select"));
+            //Serial.println(F("Select"));
             updateState(MEASUREMENT_SCREEN1);         
             break;
         } 
@@ -287,22 +287,22 @@ void monitorInput()
         switch(buttonPress)
         {
           case RIGHT_BUTTON:
-            Serial.println(F("Right"));
+            //Serial.println(F("Right"));
             updateState(RESULTS_MENU_VIEW);            
             break;
           case LEFT_BUTTON:
-             Serial.println(F("Left"));         
+            //Serial.println(F("Left"));         
             break;
           case DOWN_BUTTON:
-            Serial.println(F("Down"));
+            //Serial.println(F("Down"));
             updateState(MAIN_MENU_SETTINGS);         
             break;
           case UP_BUTTON:
-            Serial.println(F("Up"));
+            //Serial.println(F("Up"));
             updateState(MAIN_MENU_MEASURE);          
             break;
           case SELECT_BUTTON:
-            Serial.println(F("Select"));   
+            //Serial.println(F("Select"));   
             readOutSensors();       
             break;
         } 
@@ -311,22 +311,22 @@ void monitorInput()
         switch(buttonPress)
         {
           case RIGHT_BUTTON:
-            Serial.println(F("Right"));
+            //Serial.println(F("Right"));
             updateState(SETTINGS_MENU_CALIBRATE);
             break;
           case LEFT_BUTTON:
-             Serial.println(F("Left"));         
+            //Serial.println(F("Left"));         
             break;
           case DOWN_BUTTON:
-            Serial.println(F("Down"));   
-              updateState(MAIN_MENU_MEASURE);       
+            //Serial.println(F("Down"));   
+            updateState(MAIN_MENU_MEASURE);       
             break;
           case UP_BUTTON:
-            Serial.println(F("Up")); 
+            //Serial.println(F("Up")); 
             updateState(MAIN_MENU_RESULTS);         
             break;
           case SELECT_BUTTON:
-            Serial.println(F("Select"));
+            //Serial.println(F("Select"));
             break;
         }
         break;
@@ -344,19 +344,19 @@ void monitorInput()
         switch(buttonPress)
         {
           case RIGHT_BUTTON:
-            Serial.println(F("Right"));
+            //Serial.println(F("Right"));
             break;
           case LEFT_BUTTON:
-             Serial.println(F("Left"));         
+            //Serial.println(F("Left"));         
             break;
           case DOWN_BUTTON:
-            Serial.println(F("Down"));          
+            //Serial.println(F("Down"));          
             break;
           case UP_BUTTON:
-            Serial.println(F("Up"));          
+            //Serial.println(F("Up"));          
             break;
           case SELECT_BUTTON:
-            Serial.println(F("Select"));
+            //Serial.println(F("Select"));
             break;
         } 
         break;
@@ -364,19 +364,19 @@ void monitorInput()
         switch(buttonPress)
         {      
           case RIGHT_BUTTON:
-            Serial.println(F("Right"));
+            //Serial.println(F("Right"));
             break;
           case LEFT_BUTTON:
-             Serial.println(F("Left"));         
+            //Serial.println(F("Left"));         
             break;
           case DOWN_BUTTON:
-            Serial.println(F("Down"));          
+            //Serial.println(F("Down"));          
             break;
           case UP_BUTTON:
-            Serial.println(F("Up"));          
+            //Serial.println(F("Up"));          
             break;
           case SELECT_BUTTON:
-            Serial.println(F("Select"));
+            //Serial.println(F("Select"));
             break;
         } 
         break;
@@ -384,22 +384,22 @@ void monitorInput()
         switch(buttonPress)
         {
           case RIGHT_BUTTON:
-            Serial.println(F("Right"));
+            //Serial.println(F("Right"));
             break;
           case LEFT_BUTTON:
-            Serial.println(F("Left"));
+            //Serial.println(F("Left"));
             updateState(MAIN_MENU_RESULTS);        
             break;
           case DOWN_BUTTON:
-            Serial.println(F("Down")); 
+            //Serial.println(F("Down")); 
             updateState(RESULTS_MENU_CLEAR);         
             break;
           case UP_BUTTON:
-            Serial.println(F("Up")); 
+            //Serial.println(F("Up")); 
             updateState(RESULTS_MENU_CLEAR);         
             break;
           case SELECT_BUTTON:
-            Serial.println(F("Select"));
+            //Serial.println(F("Select"));
             break;
         } 
         break;
@@ -407,22 +407,22 @@ void monitorInput()
         switch(buttonPress)
         {
           case RIGHT_BUTTON:
-            Serial.println(F("Right"));
+            //Serial.println(F("Right"));
             break;
           case LEFT_BUTTON:
-            Serial.println(F("Left"));
+            //Serial.println(F("Left"));
             updateState(MAIN_MENU_RESULTS);         
             break;
           case DOWN_BUTTON:
-            Serial.println(F("Down"));
+            //Serial.println(F("Down"));
             updateState(RESULTS_MENU_VIEW);          
             break;
           case UP_BUTTON:
-            Serial.println(F("Up")); 
+            //Serial.println(F("Up")); 
             updateState(RESULTS_MENU_VIEW);         
             break;
           case SELECT_BUTTON:
-            Serial.println(F("Select"));
+            //Serial.println(F("Select"));
             break;
         } 
         break;
@@ -430,19 +430,19 @@ void monitorInput()
         switch(buttonPress)
         {
           case RIGHT_BUTTON:
-            Serial.println(F("Right"));
+            //Serial.println(F("Right"));
             break;
           case LEFT_BUTTON:
-             Serial.println(F("Left"));         
+            //Serial.println(F("Left"));         
             break;
           case DOWN_BUTTON:
-            Serial.println(F("Down"));          
+            //Serial.println(F("Down"));          
             break;
           case UP_BUTTON:
-            Serial.println(F("Up"));          
+            //Serial.println(F("Up"));          
             break;
           case SELECT_BUTTON:
-            Serial.println(F("Select"));
+            //Serial.println(F("Select"));
             break;
         } 
         break;
@@ -450,20 +450,20 @@ void monitorInput()
         switch(buttonPress)
         {
           case RIGHT_BUTTON:
-            Serial.println(F("Right"));
+            //Serial.println(F("Right"));
             break;
           case LEFT_BUTTON:
-            Serial.println(F("Left"));
+            //Serial.println(F("Left"));
             updateState(MAIN_MENU_SETTINGS);         
             break;
           case DOWN_BUTTON:
-            Serial.println(F("Down"));          
+            //Serial.println(F("Down"));          
             break;
           case UP_BUTTON:
-            Serial.println(F("Up"));          
+            //Serial.println(F("Up"));          
             break;
           case SELECT_BUTTON:
-            Serial.println(F("Select"));
+            //Serial.println(F("Select"));
             updateState(CALIBRATE_SCREEN1);
             break;
         }
@@ -503,17 +503,36 @@ void readOutSensors()
   }
 }
 
+int averageVal(int hallSensor, int numReadings)
+{
+  int averageValue = 0;
+  unsigned int i;
+  
+  for (i = 1; i <= numReadings; i++) {
+    averageValue = (averageValue + analogRead(hallSensor));
+  }
+  return averageValue / numReadings;
+}
+
 bool pistonUp()
 {
   //Checks to see if piston is in up position
   //Read values to look for in FRAM, and compare to current values
-  int hallSensorOneThreshold = 950;
-  int hallSensorTwoThreshold = 600;
-  Serial.print("A0: ");
-  Serial.println(analogRead(HALL_SENSOR1));
-  Serial.print("A1: ");
-  Serial.println(analogRead(HALL_SENSOR2));
-  return (analogRead(HALL_SENSOR1) > hallSensorOneThreshold && analogRead(HALL_SENSOR2) < hallSensorTwoThreshold);
+  
+  //If sensor 2 > 512 and < 600, and sensor 1 > 1000 and slope = 0
+  int sensorOneLL = 925;
+  int sensorTwoLL = 500;
+  int sensorTwoUL = 600;
+  
+  int sensorOneVal = averageVal(HALL_SENSOR1, 3);
+  delayMicroseconds(100);
+  int sensorOneDelta = (averageVal(HALL_SENSOR1, 3) - sensorOneVal);
+
+  int sensorTwoVal = averageVal(HALL_SENSOR2, 3);
+  delayMicroseconds(100);
+  int sensorTwoDelta = (averageVal(HALL_SENSOR2, 3) - sensorTwoVal);  
+  
+  return (sensorOneVal > sensorOneLL && sensorOneDelta == 0 && sensorTwoVal > sensorTwoLL && sensorTwoVal < sensorTwoUL);
   //return false;
 }
 
@@ -615,9 +634,7 @@ void setup() {
 }
 
 void loop() {
-  
   //measureStuff();
-  
   if (currentState == MEASUREMENT_SCREEN1 || currentState == CALIBRATE_SCREEN1) {
     monitorInput();
     if (currentState == MEASUREMENT_SCREEN1 && pistonUp()) {
