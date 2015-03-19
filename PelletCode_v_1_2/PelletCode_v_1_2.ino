@@ -37,7 +37,7 @@ Hackscribble_Ferro myFerro(MB85RS64);
 int lastButton = 0;
 int currentState = 0;
 int nominalUpVal = 0;
-float nCal = 0.0;
+float nCal = 1236.2;
 float pelletDia = 0.0;
 //byte sensorStatus = B00000000;
 
@@ -538,61 +538,92 @@ void monitorInput()
 
 void performMeasurement(int mode)
 {
-  double delta = 0;
-  double maxVal = 0;
+  int sensorVal = 0;
+  int maxVal = 0;
   long timeStamp_1 = micros();
   long timeStamp_2 = 0;
   long timeStamp_3 = 0;
   long timeStamp_4 = 0;
-
-  while(delta > -2) {
-    double sensorVal = averageVal(HALL_SENSOR2,3);
+  
+  sensorVal = analogRead(HALL_SENSOR2);
+  
+  while(sensorVal > 512) {
+    sensorVal = analogRead(HALL_SENSOR2);
+    
+    //ADD A COUNTER IN HERE, TO SEE WHAT THE MEASUREMENT RESOLUTION IS
+    
     if(sensorVal >= maxVal) {
       maxVal = sensorVal;
+      //DOES ELIMINATING THE SUBTRACTION STEP BELOW MAKE THIS ANY FASTER?
       timeStamp_2 = micros() - timeStamp_1;
-    }
-    //delayMicroseconds(50);
-    delta = averageVal(HALL_SENSOR2,3) - sensorVal;
+      #ifdef DEBUG
+      Serial.print(timeStamp_2);
+      Serial.print(",");
+      Serial.println(maxVal);
+      #endif
+    } 
   }
+  #ifdef DEBUG
   Serial.print("Max Val 2: ");
   Serial.print(maxVal);
   Serial.print(" at: ");
   Serial.println(timeStamp_2);
+  #endif
   maxVal = 0;
-  delta = 0;
-  while(delta > -2) {
-    double sensorVal = averageVal(HALL_SENSOR3,3);
+  sensorVal = analogRead(HALL_SENSOR3);
+  
+  while(sensorVal > 512) {
+    sensorVal = analogRead(HALL_SENSOR3);
+    #ifdef DEBUG
+    Serial.print(micros());
+    Serial.print(",");
+    Serial.println(sensorVal);    
+    #endif
     if(sensorVal >= maxVal) {
       maxVal = sensorVal;
       timeStamp_3 = micros() - timeStamp_1;
+      #ifdef DEBUG
+      Serial.print(timeStamp_3);
+      Serial.print(",");
+      Serial.println(maxVal);
+      #endif
     }
-    //delayMicroseconds(50);
-    delta = averageVal(HALL_SENSOR3,3) - sensorVal;
-  }
+  } 
+  #ifdef DEBUG
   Serial.print("Max Val 3: ");
   Serial.print(maxVal);
   Serial.print(" at: ");
   Serial.println(timeStamp_3);
+  #endif
   maxVal = 0;
-  delta = 0;
-  while(delta > -2) {
-    double sensorVal = averageVal(HALL_SENSOR4,3);
+  sensorVal = analogRead(HALL_SENSOR4);
+
+  while(sensorVal > 512) {
+    sensorVal = analogRead(HALL_SENSOR4);
+    #ifdef DEBUG
+    Serial.print(micros());
+    Serial.print(",");
+    Serial.println(sensorVal);
+    #endif
+    
     if(sensorVal >= maxVal) {
       maxVal = sensorVal;
       timeStamp_4 = micros() - timeStamp_1;
+      #ifdef DEBUG
+      Serial.print(timeStamp_4);
+      Serial.print(",");
+      Serial.println(maxVal);
+      #endif
     }
-    //delayMicroseconds(50);
-    delta = averageVal(HALL_SENSOR4,3) - sensorVal;
-    //Serial.println(sensorTwoVal);
-    //Serial.println(sensorTwoDelta);
   }
+  #ifdef DEBUG
   Serial.print("Max Val 4: ");
   Serial.print(maxVal);
   Serial.print(" at: ");
   Serial.println(timeStamp_4);
-  
+  #endif
   //time from sensor 2 to sensor 4 - could also just use 3-4, if more accurate
-  float totalTime = timeStamp_4 - timeStamp_2;
+  long totalTime = timeStamp_4 - timeStamp_3;
   
   if (mode == MEASURING) {
     pelletDia = calculateResults(totalTime);
@@ -603,17 +634,18 @@ void performMeasurement(int mode)
   }
 }
 
-float calculateResults(float timeMeasured)
+float calculateResults(long timeMeasured)
 {
-  float boreDia = 0.180;
+  //Does timeMeasured need to be a float for the math operation below?
+  float boreDia = 0.17905;
   float result = sqrt((timeMeasured * sq(boreDia) - nCal) / timeMeasured);
   return result;
 }
 
-float performCalibration(float timeMeasured)
+float performCalibration(long timeMeasured)
 {
-  float boreDia = 0.180;
-  float ballDia = 0.177;
+  float boreDia = 0.17905;
+  float ballDia = 0.17403;
   //n = Tball(Dbore^2-Dball^2)
   float newCal = timeMeasured*(sq(boreDia) - sq(ballDia));
 
@@ -637,7 +669,12 @@ bool pistonUp()
   //Read values to look for in FRAM, and compare to current values
   
   //If sensor 2 > 512 and < 600, and sensor 1 > 1000 and slope = 0
+  /*
   int sensorOneLL = 925;
+  int sensorTwoLL = 500;
+  int sensorTwoUL = 600;
+  */
+  int sensorOneLL = 840;
   int sensorTwoLL = 500;
   int sensorTwoUL = 600;
   
@@ -658,11 +695,11 @@ bool pistonUp()
 bool pistonFalling()
 {
   double sensorOneVal = averageVal(HALL_SENSOR1, 3);
-  //delayMicroseconds(500);
+  //delayMicroseconds(200);
   //double sensorOneDelta = (averageVal(HALL_SENSOR1, 3) - sensorOneVal);
   //Serial.println(sensorOneVal);
   //Serial.println(sensorOneDelta);
-  return (sensorOneVal - nominalUpVal < -25);
+  return (sensorOneVal - nominalUpVal < -50);
 }
 
 long readVcc() {
@@ -724,7 +761,8 @@ void setup() {
   pinMode(HALL_SENSOR3, INPUT);
   pinMode(HALL_SENSOR4, INPUT);
   
-  setupFRAM();
+  //setupFRAM();
+  
   displaySetup();
  
 //  Serial.print("Vcc: ");
@@ -733,7 +771,7 @@ void setup() {
 }
 
 void loop() {
-  //measureStuff();
+  measureStuff();
   if (currentState == MEASUREMENT_SCREEN1 || currentState == CALIBRATE_SCREEN1) {
     monitorInput();
     if (currentState == MEASUREMENT_SCREEN1 && pistonUp()) {
